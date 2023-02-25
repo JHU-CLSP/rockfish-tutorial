@@ -9,8 +9,8 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
  - If you're a student, you need to get access through your PI (usually you advisor). 
 
 # Repository Content 
- - `test_gpus` shows how to run a simple script on the GPU processor.
- - `classification-example` shows how to run a simple classification task on the GPU processor.
+ - [`test_gpus`](test_gpus) shows how to run a simple script on the GPU processor.
+ - [`classification-example`](classification-example) shows how to run a simple classification task on the GPU processor.
 
 # FAQ
 

@@ -16,7 +16,25 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
 
 - **How do I find what queues are available?** 
   - Type the command `sinfo -s` to get a list of the partition/queues. 
-  - `sinfo -p partition-name` will display the utilization for this partition. 
+  - `sinfo -p partition-name` will display the utilization for this partition.
+- **How do I know what nodes are available?** 
+  - Type the command `sinfo -N` to get a list of the nodes. 
+  - `sinfo -N -p partition-name` will display the utilization for this partition.
+- **How do I interpret "states"?**
+  - `idle`: The node is available for use. 
+  - `alloc`: The node is currently being used by a job. 
+  - `mix`: The node is currently unavailable.
+- **How do I submit multiple jobs?** 
+  - You can submit multiple jobs by using the `--array` flag. 
+  - For example, `sbatch --array=1-10 job.sh` will submit 10 jobs. 
+  - You can access the job number using the environment variable `$SLURM_ARRAY_TASK_ID`. 
+  - For example, `echo $SLURM_ARRAY_TASK_ID` will print the job number.
+- **How do I submit a job to a specific node?** 
+  - You can submit a job to a specific node by using the `--nodelist` flag. 
+  - For example, `sbatch --nodelist=node1 job.sh` will submit the job to node1. 
+  - You can also use the `--exclude` flag to exclude a node. 
+  - For example, `sbatch --exclude=node1 job.sh` will submit the job to any node except node1.
+  
 
 
 # Additional Resources

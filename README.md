@@ -9,9 +9,17 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
  - If you're a student, you need to get access through your PI (usually you advisor). 
 
 # Repository Content 
-`scripts` folder contains template script to run tasks using {`cpu`, `A100` and `V100`}.
+ - `test_gpus` shows how to run a simple script on the GPU processor.
+ - `classification-example` shows how to run a simple classification task on the GPU processor.
 
-# Additional resoruces
+# FAQ
+
+- **How do I find what queues are available?** 
+  - Type the command `sinfo -s` to get a list of the partition/queues. 
+  - `sinfo -p partition-name` will display the utilization for this partition. 
+
+
+# Additional Resources
  - Tracking the accounts/usage: https://coldfront.rockfish.jhu.edu/ 
  - Login node: `ssh userid@login.rockfish.jhu.edu` 
  - Help desk:  help@rockfish.jhu.edu if you face any issues, email these folks! :) 

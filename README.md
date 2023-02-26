@@ -29,11 +29,8 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
   - Further details here: https://slurm.schedmd.com/sinfo.html 
 - **How do I see how many GPUs are available on each node?**
   - Type the command `sinfo -N -p a100` to get a list of the nodes and the number of GPUs available on each node.
-- **How do I submit multiple jobs?** 
-  - You can submit multiple jobs by using the `--array` flag. 
-  - For example, `sbatch --array=1-10 job.sh` will submit 10 jobs. 
-  - You can access the job number using the environment variable `$SLURM_ARRAY_TASK_ID`. 
-  - For example, `echo $SLURM_ARRAY_TASK_ID` will print the job number.
+- **How do I submit multiple jobs with this different parameters?** 
+  - See this page: https://www.osc.edu/book/export/html/4046 
 - **How do I submit a job to a specific node?** 
   - You can submit a job to a specific node by using the `--nodelist` flag. 
   - For example, `sbatch --nodelist=node1 job.sh` will submit the job to node1. 

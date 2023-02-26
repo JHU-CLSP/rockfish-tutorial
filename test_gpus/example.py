@@ -15,12 +15,10 @@ def print_gpu_memory():
 
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
-
 if torch.cuda.is_available():
     print('GPU is available')
 else:
     print('GPU is not available')
-
 
 # show available GPU statistics
 print_gpu_memory()
@@ -29,7 +27,7 @@ print_gpu_memory()
 # creat increasingly large tensors in gpu memory
 all = []
 while True:
-    all.append(torch.rand(100000, 100000).cuda())
+    all.append(torch.rand(100000, 10000).cuda())
     print_gpu_memory()
     print(" - - - - - ")
 

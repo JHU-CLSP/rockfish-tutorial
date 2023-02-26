@@ -8,7 +8,6 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name="simple classification"
 
-
 module load anaconda
 
 ## You can see the available modules with:
@@ -19,4 +18,4 @@ module load anaconda
 #conda info --envs
 conda activate toy_classification_env
 pip install -r requirements.txt
-srun python classification.py --device cuda --batch_size 256 --lr 1e-5 --num_epochs 4
+srun python classification.py --device cuda --model "${MODEL}" --batch_size "${BATCH_SIZE}" --lr 1e-5 --num_epochs 4

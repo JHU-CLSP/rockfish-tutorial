@@ -9,6 +9,7 @@ from transformers import AutoModelForSequenceClassification
 import argparse
 import subprocess
 
+
 def print_gpu_memory():
     """ Print the amount of GPU memory used """
     # check if gpu is available
@@ -57,6 +58,7 @@ class BoolQADataset(torch.utils.data.Dataset):
             'attention_mask': encoded_review['attention_mask'][0],
             'labels': torch.tensor(answer, dtype=torch.long)
         }
+
 
 def update_metrics(metrics, predictions, labels):
     """ Update a list of metrics with new predictions and labels
@@ -111,7 +113,7 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
 
     # here, we use the AdamW optimzer. Use torch.optim.Adam.
     # instantiate it on the untrained model parameters with a learning rate of 5e-5
-    optimizer = torch.optim.AdamW(mymodel.parameters(),lr=lr)
+    optimizer = torch.optim.AdamW(mymodel.parameters(), lr=lr)
 
     # now, we set up the learning rate scheduler
     lr_scheduler = get_scheduler(
@@ -160,19 +162,20 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
         print(f" - Average validation metrics: accuracy={val_accuracy}")
 
 
-def run_experiment(num_epochs, lr, batch_size, device):
+def run_experiment(model_name, num_epochs, lr, batch_size, device):
     # download dataset
     dataset = load_dataset("boolq")
     dataset = dataset.shuffle()  # shuffle the data
 
     # use this for the tokenizer argument of the TweetDataset
-    mytokenizer = AutoTokenizer.from_pretrained('distilbert-base-uncased')
+    mytokenizer = AutoTokenizer.from_pretrained(model_name)
 
     # since the dataset does not come with any validation data,
     # split the training data into "train" and "dev"
     dataset_train_subset = dataset['train'][:8000]
     dataset_dev_subset = dataset['validation']
-    dataset_test_subset = dataset['train'][8000:] # use the subset of the test set for making the experimentation faster
+    dataset_test_subset = dataset['train'][
+                          8000:]  # use the subset of the test set for making the experimentation faster
 
     max_len = 128
 
@@ -203,7 +206,7 @@ def run_experiment(num_epochs, lr, batch_size, device):
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size)
 
     # from Hugging Face (transformers), read their documentation to do this.
-    pretrained_model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
+    pretrained_model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
 
     pretrained_model.to(device)
     print("Moving model to device ..." + str(device))
@@ -227,9 +230,8 @@ if __name__ == "__main__":
     parser.add_argument("--lr", type=float, default=5e-5)
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--device", type=str, default="cuda")
+    parser.add_argument("--model", type=str, default="distilbert-base-uncased")
     args = parser.parse_args()
 
     # run the experiment
-    run_experiment(args.num_epochs, args.lr, args.batch_size, args.device)
-
-
+    run_experiment(args.model, args.num_epochs, args.lr, args.batch_size, args.device)

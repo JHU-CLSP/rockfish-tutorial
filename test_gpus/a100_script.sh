@@ -4,7 +4,7 @@
 #SBATCH --partition a100
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=12
+#SBATCH --ntasks-per-node=1
 #SBATCH --time=12:00:00
 #SBATCH --qos=qos_gpu
 #SBATCH --job-name="test_gpus"

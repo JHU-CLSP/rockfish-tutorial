@@ -19,4 +19,4 @@ module load anaconda
 #conda info --envs
 conda activate toy_classification_env
 pip install -r requirements.txt
-srun python classification.py --device cuda --batch_size 256 --lr 1e-4 --num_epochs 100
+srun python classification.py --device cuda --batch_size 256 --lr 1e-5 --num_epochs 4

@@ -1,6 +1,8 @@
 # Rockfish Tutorial 
 This is the repo for the tutorial of runing tasks on Rockfish.
-Rockfish is a community-shared cluster, i.e., everyone can use any nodes within the limits of their allocated utilization. Every quarter you request a certain amount of GPU hours (i.e., number of cores x wall time) and provide justification for them. These assigned limits will be reset on a quarterly basis (use it or lose it). 
+Rockfish is a community-shared cluster, i.e., everyone can use any nodes within the limits of their allocated utilization. 
+Every quarter you request a certain amount of GPU hours (i.e., number of cores x wall time) and provide justification 
+for them. These assigned limits will be reset on a quarterly basis (use it or lose it). 
 
 To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with your JHED. 
 
@@ -10,7 +12,7 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
 
 # Repository Content 
  - [`test_gpus`](test_gpus) shows how to run a simple script on the GPU processor. You can run `srun test_gpus.sh` to submit the job and make sure that you have access to GPU nodes. 
- - [`classification-example`](classification-example) shows how to run a simple classification task on the GPU processor.
+ - [`classification-example`](classification-example) shows how to run a simple classification task on the GPU processor. You can run `srun train_on_rockfish.sh` to train a classifier on Rockfish.
 
 # FAQ
 

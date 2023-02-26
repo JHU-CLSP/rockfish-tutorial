@@ -78,6 +78,7 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
 
 
 If you struggle with SLURM, these are useful cheatsheets: 
+ - [Slurm queueing system](https://www.arch.jhu.edu/support/slurm-queueing-system/) 
  - [Slurm basics](https://hpc.nmsu.edu/discovery/slurm/slurm-commands/) 
  - [Tutorial: Using Slurm Workload Manager](https://www.cs.sfu.ca/~ashriram/Courses/CS431/slurm.html)
  - [Job submit commands with examples](https://uwaterloo.ca/math-faculty-computing-facility/services/service-catalogue-teaching-linux/job-submit-commands-examples)

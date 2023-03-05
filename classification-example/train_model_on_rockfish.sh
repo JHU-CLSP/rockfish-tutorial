@@ -18,4 +18,14 @@ module load anaconda
 #conda info --envs
 conda activate toy_classification_env
 pip install -r requirements.txt
-srun python classification.py --device cuda --model "${MODEL}" --batch_size "${BATCH_SIZE}" --lr 1e-5 --num_epochs 4
+
+srun python classification.py --device cuda --model "distilbert-base-uncased" --batch_size "256" --lr 1e-5 --num_epochs 20
+# srun python classification.py --device cuda --model "bert-base-uncased" --batch_size "128" --lr 1e-5 --num_epochs 20
+# srun python classification.py --device cuda --model "bert-large-uncased" --batch_size "64" --lr 1e-5 --num_epochs 4
+# srun python classification.py --device cuda --model "roberta-base" --batch_size "128" --lr 1e-4 --num_epochs 20
+# srun python classification.py --device cuda --model "roberta-large" --batch_size "64" --lr 1e-5 --num_epochs 4
+# srun python classification.py --device cuda --model "t5-small" --batch_size "256" --lr 1e-5 --num_epochs 4
+# srun python classification.py --device cuda --model "t5-base" --batch_size "256" --lr 1e-5 --num_epochs 4
+# srun python classification.py --device cuda --model "t5-large" --batch_size "64" --lr 1e-5 --num_epochs 4
+# srun python classification.py --device cuda --model "t5-3b" --batch_size "16" --lr 1e-5 --num_epochs 10
+# srun python classification.py --device cuda --model "t5-11b" --batch_size "4" --lr 1e-5 --num_epochs 4

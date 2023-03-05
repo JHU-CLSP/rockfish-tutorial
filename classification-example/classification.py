@@ -113,6 +113,7 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
 
     # here, we use the AdamW optimzer. Use torch.optim.Adam.
     # instantiate it on the untrained model parameters with a learning rate of 5e-5
+    print(" >>>>>>>>  Initializing optimizer")
     optimizer = torch.optim.AdamW(mymodel.parameters(), lr=lr)
 
     # now, we set up the learning rate scheduler
@@ -148,6 +149,9 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
             optimizer.step()
             lr_scheduler.step()
 
+            # now that we have applied the gradients, clear the gradients for the next iteration
+            optimizer.zero_grad()
+
             predictions = torch.argmax(predictions, dim=1)
 
             # update metrics
@@ -164,21 +168,23 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
 
 def run_experiment(model_name, num_epochs, lr, batch_size, device):
     # download dataset
+    print("Loading the dataset ...")
     dataset = load_dataset("boolq")
     dataset = dataset.shuffle()  # shuffle the data
 
-    # use this for the tokenizer argument of the TweetDataset
-    mytokenizer = AutoTokenizer.from_pretrained(model_name)
-
+    print("Slicing the data...")
     # since the dataset does not come with any validation data,
     # split the training data into "train" and "dev"
     dataset_train_subset = dataset['train'][:8000]
     dataset_dev_subset = dataset['validation']
-    dataset_test_subset = dataset['train'][
-                          8000:]  # use the subset of the test set for making the experimentation faster
+    dataset_test_subset = dataset['train'][8000:]  # use the subset of the test set for making the experimentation faster
 
-    max_len = 128
+    max_len = 128 # any input longer than this is cut
 
+    print("Loading the tokenizer...")
+    mytokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    print("Loding the data into DS...")
     train_dataset = BoolQADataset(
         passages=list(dataset_train_subset['passage']),
         questions=list(dataset_train_subset['question']),
@@ -201,16 +207,19 @@ def run_experiment(model_name, num_epochs, lr, batch_size, device):
         max_len=max_len
     )
 
+    print(" >>>>>>>> Initializing the data loaders ... ")
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
     validation_dataloader = DataLoader(validation_dataset, batch_size=batch_size)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size)
 
     # from Hugging Face (transformers), read their documentation to do this.
+    print("Loding the model ..." )
     pretrained_model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
 
-    pretrained_model.to(device)
     print("Moving model to device ..." + str(device))
+    pretrained_model.to(device)
 
+    print(" >>>>>>>>  Starting training ... ")
     train(pretrained_model, num_epochs, train_dataloader, validation_dataloader, device, lr=lr)
 
     print_gpu_memory()

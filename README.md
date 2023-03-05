@@ -11,8 +11,8 @@ To start, create an account [here](https://coldfront.rockfish.jhu.edu/) with you
  - If you're a student, you need to get access through your PI (usually you advisor). 
 
 # Repository Content 
- - [`test_gpus`](test_gpus) shows how to run a simple script on the GPU processor. You can run `srun test_gpus.sh` to submit the job and make sure that you have access to GPU nodes. 
- - [`classification-example`](classification-example) shows how to run a simple classification task on the GPU processor. You can run `srun train_on_rockfish.sh` to train a classifier on Rockfish.
+ - [`test_gpus`](test_gpus) shows how to run a simple script on the GPU processor. You can run `sbatch test_gpus.sh` to submit the job and make sure that you have access to GPU nodes. 
+ - [`classification-example`](classification-example) shows how to run a simple classification task on the GPU processor. You can run `sbatch train_on_rockfish.sh` to train a classifier on Rockfish.
 
 # FAQ
 
